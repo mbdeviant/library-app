@@ -1,0 +1,16 @@
+*{
+    background-color: gray;
+}
+
+.book-card{
+    border: 1px solid black;
+    
+    width: 175px;
+    height: 250px;
+}
+#card-container{
+    display: flex;
+    width:  700px;
+    height: 500px;
+    background-color: maroon;
+}
