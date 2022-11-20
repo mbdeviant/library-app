@@ -1,5 +1,8 @@
 const container = document.getElementById('card-container');
 const newBookButton = document.getElementById('new-book');
+const overlay = document.getElementById('form-overlay');
+const form = document.getElementById('form-container');
+const submitButton = document.getElementById('book-submit');
 
 
 let myLibrary = [];
@@ -17,24 +20,27 @@ function addToLibrary(book) {
     myLibrary.push(book);
 }
 
-newBookButton.addEventListener('click',()=>{
-    
+newBookButton.addEventListener('click', () => {
+    overlay.style.display = 'block';
 });
 
-let newbook = new Book('ahmet', 'mehmet', '12');
-let anotherBook = new Book('foo', 'bar', '152');
-let yetAnotherBook = new Book('bar', 'foo', '512');
-let aNewOne = new Book('alice', 'potato', '231');
-addToLibrary(newbook);
-addToLibrary(anotherBook);
-addToLibrary(yetAnotherBook);
-addToLibrary(aNewOne);
+overlay.addEventListener('click', (e) => {
+    if (e.target == overlay) overlay.style.display = 'none';
+})
 
-function createBookCard(){
-    myLibrary.forEach((item)=>{
+submitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    addNewBook();
+});
+
+
+function createBookCard() {
+
+    myLibrary.forEach((item) => {
+
         const bookCard = document.createElement('div');
         bookCard.classList.add('book-card');
-
         const title = document.createElement('p');
         const author = document.createElement('p');
         const pages = document.createElement('p');
@@ -46,11 +52,21 @@ function createBookCard(){
         bookCard.appendChild(title);
         bookCard.appendChild(author);
         bookCard.appendChild(pages);
-
         container.appendChild(bookCard);
+        
     });
 }
-createBookCard();
 
 
+function addNewBook() {
+    const bookTitle = document.getElementById('book-title').value;
+    const bookAuthor = document.getElementById('book-author').value;
+    const bookPages = document.getElementById('book-pages').value;
 
+
+    let newBook = new Book(bookTitle, bookAuthor, bookPages);
+    addToLibrary(newBook);
+    
+    createBookCard();
+
+} 
