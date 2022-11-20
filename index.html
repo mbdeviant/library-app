@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,19 +9,26 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <div id="card-container">
-        
+    <div id="form-overlay">
+        <div class="form-container">
+            <form action="" id="book-form">
+                <label for="title">TITLE</label>
+                <input type="text" name="book_title" id="book-title">
+                <label for="author">AUTHOR</label>
+                <input type="text" name="book_author" id="book-author">
+                <label for="pages">PAGES</label>
+                <input type="number" name="book_pages" id="book-pages">
+                <button type="submit" id="book-submit">ADD</button>
+            </form>
+        </div>
     </div>
     <button id="new-book">+</button>
-    <form action="" id="book-card">
-        <label for="title">TITLE</label>
-        <input type="text" name="book_title" id="title">
-        <label for="author">AUTHOR</label>
-        <input type="text" name="book_author" id="author">
-        <label for="pages">PAGES</label>
-        <input type="number" name="book_pages" id="pages">
-        <button type="submit">ADD</button>
-    </form>
+    <div id="card-container">
+
+    </div>
+
 </body>
+
 </html>
