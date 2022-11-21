@@ -41,9 +41,14 @@
     left: 0;
     right: 0;
 }
+.checkbox{
+    display: flex;
+    justify-content: space-between;
+}
 
 #book-form {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     width: 250px;
 }
