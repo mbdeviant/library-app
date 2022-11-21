@@ -3,17 +3,14 @@ const newBookButton = document.getElementById('new-book');
 const overlay = document.getElementById('form-overlay');
 const form = document.getElementById('book-form');
 
-
-
 let myLibrary = [];
 let log = console.log;
 
-function Book(title, author, pages) {
+function Book(title, author, pages, checkbox) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.isRead = false;
-
+    this.isRead = checkbox.checked;
 }
 
 newBookButton.addEventListener('click', () => {
@@ -37,8 +34,8 @@ function addToLibrary() {
     const bookTitle = document.getElementById('book-title').value;
     const bookAuthor = document.getElementById('book-author').value;
     const bookPages = document.getElementById('book-pages').value;
-    let newBook = new Book(bookTitle, bookAuthor, bookPages);
-
+    const checkbox = document.getElementById('checkbox');
+    let newBook = new Book(bookTitle, bookAuthor, bookPages, checkbox);
 
     myLibrary.push(newBook);
     form.reset();
@@ -53,18 +50,27 @@ function createBookCard(i) {
     const readStatus = document.createElement('button');
     bookCard.classList.add('book-card');
 
-    removeButton.innerHTML = 'Remove';//not functional
+    removeButton.innerHTML = 'Remove';
     readStatus.innerHTML = 'Read Status';
 
     for (let i = 0; i < myLibrary.length; i++) {
         title.innerHTML = `"${myLibrary[i].title}"`;
         author.innerHTML = `by ${myLibrary[i].author}`;
         pages.innerHTML = `${myLibrary[i].pages} pages`;
+        if (myLibrary[i].isRead == true) {
+            readStatus.innerHTML = 'Read'
+            readStatus.style.background = 'Green'
+            console.log('patates')
+        }
+        else {
+            readStatus.innerHTML = 'Not Read';
+            readStatus.style.background = 'Red';
+        }
     }
 
     readStatus.addEventListener('click', () => {
         (readStatus.innerHTML == 'Read') ? readStatus.innerHTML = 'Not Read' : readStatus.innerHTML = 'Read';
-        (readStatus.innerHTML == 'Read') ? readStatus.style.background = 'Green' : readStatus.style.background = 'Red';
+        (readStatus.innerHTML == 'Not Read') ? readStatus.style.background = 'Red' : readStatus.style.background = 'Green';
     });
     removeButton.addEventListener('click', () => {
         myLibrary.splice(myLibrary.indexOf(i), 1);
