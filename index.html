@@ -17,15 +17,21 @@
                 <input type="text" name="book_title" id="book-title" placeholder="Title" required />
                 <input type="text" name="book_author" id="book-author" placeholder="Author" required />
                 <input type="number" name="book_pages" id="book-pages" placeholder="Pages" required />
-                <div class="checkbox">
+                <div class="checkbox-area">
                     <label for="read-status">Have you read this book?</label>
-                    <input type="checkbox" name="book_read" id="checkbox" >
+                    <input type="checkbox" name="book_read" id="checkbox">
                 </div>
-                <button type="submit" id="book-submit">ADD</button>
+                <button type="submit" id="book-submit-button">ADD</button>
             </form>
         </div>
     </div>
-    <button id="new-book">+</button>
+    <div class="header">
+        <h1>My Library</h1>
+        <div class="header-bottom">
+            <p>Add a new book to library</p>
+            <button id="new-book-button">+</button>
+        </div>
+    </div>
     <div id="card-container"></div>
 
 </body>
