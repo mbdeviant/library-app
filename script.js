@@ -1,5 +1,5 @@
 const container = document.getElementById('card-container');
-const newBookButton = document.getElementById('new-book');
+const newBookButton = document.getElementById('new-book-button');
 const overlay = document.getElementById('form-overlay');
 const form = document.getElementById('book-form');
 
@@ -15,6 +15,7 @@ function Book(title, author, pages, checkbox) {
 
 newBookButton.addEventListener('click', () => {
     overlay.style.display = 'block';
+
 });
 
 overlay.addEventListener('click', (e) => {
@@ -26,6 +27,7 @@ form.addEventListener('submit', (e) => {
     addToLibrary();
     createBookCard();
     closeOverlay();
+
     log(myLibrary);
 })
 
@@ -36,19 +38,22 @@ function addToLibrary() {
     const bookPages = document.getElementById('book-pages').value;
     const checkbox = document.getElementById('checkbox');
     let newBook = new Book(bookTitle, bookAuthor, bookPages, checkbox);
-
+    
     myLibrary.push(newBook);
     form.reset();
 }
 
 function createBookCard(i) {
     const bookCard = document.createElement('div');
-    const title = document.createElement('p');
+    const title = document.createElement('h3');
     const author = document.createElement('p');
     const pages = document.createElement('p');
+    const buttons = document.createElement('div')
     const removeButton = document.createElement('button');
     const readStatus = document.createElement('button');
     bookCard.classList.add('book-card');
+    buttons.classList.add('card-buttons');
+    removeButton.classList.add('remove-button');
 
     removeButton.innerHTML = 'Remove';
     readStatus.innerHTML = 'Read Status';
@@ -58,19 +63,18 @@ function createBookCard(i) {
         author.innerHTML = `by ${myLibrary[i].author}`;
         pages.innerHTML = `${myLibrary[i].pages} pages`;
         if (myLibrary[i].isRead == true) {
-            readStatus.innerHTML = 'Read'
-            readStatus.style.background = 'Green'
+            readStatus.innerHTML = '✔'
+            readStatus.style.background = '#00B300'
             console.log('patates')
         }
         else {
-            readStatus.innerHTML = 'Not Read';
-            readStatus.style.background = 'Red';
+            readStatus.innerHTML = '✖';
+            readStatus.style.background = '#CD5C27';
         }
     }
-
     readStatus.addEventListener('click', () => {
-        (readStatus.innerHTML == 'Read') ? readStatus.innerHTML = 'Not Read' : readStatus.innerHTML = 'Read';
-        (readStatus.innerHTML == 'Not Read') ? readStatus.style.background = 'Red' : readStatus.style.background = 'Green';
+        (readStatus.innerHTML == '✔') ? readStatus.innerHTML = '✖' : readStatus.innerHTML = '✔';
+        (readStatus.innerHTML == '✖') ? readStatus.style.background = '#CD5C27' : readStatus.style.background = '#00B300';
     });
     removeButton.addEventListener('click', () => {
         myLibrary.splice(myLibrary.indexOf(i), 1);
@@ -81,11 +85,14 @@ function createBookCard(i) {
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
-    bookCard.appendChild(removeButton);
-    bookCard.appendChild(readStatus);
+    buttons.appendChild(removeButton);
+    buttons.appendChild(readStatus);
+    bookCard.appendChild(buttons);
     container.appendChild(bookCard);
 }
+
 
 function closeOverlay() {
     overlay.style.display = 'none';
 }
+
