@@ -12,8 +12,9 @@ html {
     background-color: #FFE7CC;
     font-size: 20px;
     border: 1px solid black;
-    padding: 25px;
+    padding: 55px;
     height: auto;
+    font-size: 24px;
     
 }
 
@@ -125,8 +126,8 @@ input:focus{
 }
 
 #new-book-button {
-    width: 27px;
-    font-size: 23px;
+    width: 35px;
+    font-size: 45px;
     text-align: center;
     background-color: transparent;
     border: transparent;
