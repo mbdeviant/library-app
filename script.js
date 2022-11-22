@@ -4,7 +4,6 @@ const overlay = document.getElementById('form-overlay');
 const form = document.getElementById('book-form');
 
 let myLibrary = [];
-let log = console.log;
 
 function Book(title, author, pages, checkbox) {
     this.title = title;
@@ -15,7 +14,6 @@ function Book(title, author, pages, checkbox) {
 
 newBookButton.addEventListener('click', () => {
     overlay.style.display = 'block';
-
 });
 
 overlay.addEventListener('click', (e) => {
@@ -27,10 +25,7 @@ form.addEventListener('submit', (e) => {
     addToLibrary();
     createBookCard();
     closeOverlay();
-
-    log(myLibrary);
-})
-
+});
 
 function addToLibrary() {
     const bookTitle = document.getElementById('book-title').value;
@@ -38,7 +33,7 @@ function addToLibrary() {
     const bookPages = document.getElementById('book-pages').value;
     const checkbox = document.getElementById('checkbox');
     let newBook = new Book(bookTitle, bookAuthor, bookPages, checkbox);
-    
+
     myLibrary.push(newBook);
     form.reset();
 }
@@ -63,9 +58,8 @@ function createBookCard(i) {
         author.innerHTML = `by ${myLibrary[i].author}`;
         pages.innerHTML = `${myLibrary[i].pages} pages`;
         if (myLibrary[i].isRead == true) {
-            readStatus.innerHTML = '✔'
-            readStatus.style.background = '#00B300'
-            console.log('patates')
+            readStatus.innerHTML = '✔';
+            readStatus.style.background = '#00B300';
         }
         else {
             readStatus.innerHTML = '✖';
@@ -79,7 +73,6 @@ function createBookCard(i) {
     removeButton.addEventListener('click', () => {
         myLibrary.splice(myLibrary.indexOf(i), 1);
         container.removeChild(bookCard);
-        log(myLibrary);
     });
 
     bookCard.appendChild(title);
@@ -91,8 +84,6 @@ function createBookCard(i) {
     container.appendChild(bookCard);
 }
 
-
 function closeOverlay() {
     overlay.style.display = 'none';
 }
-
