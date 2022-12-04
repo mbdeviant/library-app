@@ -3,14 +3,29 @@ const newBookButton = document.getElementById('new-book-button');
 const overlay = document.getElementById('form-overlay');
 const form = document.getElementById('book-form');
 
-let myLibrary = [];
-
-function Book(title, author, pages, checkbox) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = checkbox.checked;
+class Library {
+    constructor() {
+        this.books = [];
+    }
+    addBook(book) {
+        this.books.push(book);
+    }
+    removeBook(book) {
+        const index = this.books.indexOf(book);
+        if (index > -1) this.books.splice(index, 1);
+    }
 }
+
+class Book {
+    constructor(title, author, pages, checkbox) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = checkbox.checked;
+    }
+}
+
+const library = new Library();
 
 newBookButton.addEventListener('click', () => {
     overlay.style.display = 'block';
@@ -34,7 +49,7 @@ function addToLibrary() {
     const checkbox = document.getElementById('checkbox');
     let newBook = new Book(bookTitle, bookAuthor, bookPages, checkbox);
 
-    myLibrary.push(newBook);
+    library.addBook(newBook);
     form.reset();
 }
 
@@ -53,25 +68,25 @@ function createBookCard(i) {
     removeButton.innerHTML = 'Remove';
     readStatus.innerHTML = 'Read Status';
 
-    for (let i = 0; i < myLibrary.length; i++) {
-        title.innerHTML = `"${myLibrary[i].title}"`;
-        author.innerHTML = `by ${myLibrary[i].author}`;
-        pages.innerHTML = `${myLibrary[i].pages} pages`;
-        if (myLibrary[i].isRead == true) {
-            readStatus.innerHTML = '✔';
+    for (let i = 0; i < library.books.length; i++) {
+        title.innerHTML = `"${library.books[i].title}"`;
+        author.innerHTML = `by ${library.books[i].author}`;
+        pages.innerHTML = `${library.books[i].pages} pages`;
+        if (library.books[i].isRead == true) {
+            readStatus.innerHTML = 'Read';
             readStatus.style.background = '#00B300';
         }
         else {
-            readStatus.innerHTML = '✖';
+            readStatus.innerHTML = 'Not Read';
             readStatus.style.background = '#CD5C27';
         }
     }
     readStatus.addEventListener('click', () => {
-        (readStatus.innerHTML == '✔') ? readStatus.innerHTML = '✖' : readStatus.innerHTML = '✔';
-        (readStatus.innerHTML == '✖') ? readStatus.style.background = '#CD5C27' : readStatus.style.background = '#00B300';
+        (readStatus.innerHTML == 'Read') ? readStatus.innerHTML = 'Not Read' : readStatus.innerHTML = 'Read';
+        (readStatus.innerHTML == 'Not Read') ? readStatus.style.background = '#CD5C27' : readStatus.style.background = '#00B300';
     });
     removeButton.addEventListener('click', () => {
-        myLibrary.splice(myLibrary.indexOf(i), 1);
+        library.books.splice(library.books.indexOf(i), 1);
         container.removeChild(bookCard);
     });
 
