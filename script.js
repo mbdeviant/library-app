@@ -27,6 +27,7 @@ class Book {
 
 const library = new Library();
 
+
 newBookButton.addEventListener('click', () => {
     overlay.style.display = 'block';
 });
